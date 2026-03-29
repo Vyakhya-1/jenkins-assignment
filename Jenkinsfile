@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'maven-agent' }
 
     environment {
         M2_HOME = '/opt/maven'

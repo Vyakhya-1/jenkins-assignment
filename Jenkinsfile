@@ -1,5 +1,11 @@
 pipeline {
-    agent { label 'maven-agent' }
+     agent any
+
+    environment {
+        M2_HOME = '/opt/maven'
+        PATH = "$M2_HOME/bin:$PATH"
+        JAVA_HOME = '/usr/lib/jvm/java-21-openjdk-amd64'
+    }
 
     stages {
 

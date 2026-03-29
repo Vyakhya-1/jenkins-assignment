@@ -4,7 +4,9 @@ pipeline {
     stages {
 
         stage('Checkout') {
-            steps {
+            steps {sshagent(['github-credentials']) {
+            sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
+        }
                 // Pull code from GitHub using SSH
                 git branch: 'main', url: 'git@github.com:Vyakhya-1/jenkins-assignment.git'
             }

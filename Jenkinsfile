@@ -24,7 +24,7 @@ git branch: 'main',
                 sshagent(['app-server-key']) {
                     sh '''
                     # Copy the JAR to the app server
-                    scp -o StrictHostKeyChecking=no target/*.jar ubuntu@<APP-IP>:/home/ubuntu/
+                    scp -o StrictHostKeyChecking=no target/*.jar ubuntu@44.197.239.52:/home/ubuntu/
                     
                     # Run the JAR in background
                     ssh -o StrictHostKeyChecking=no ubuntu@44.197.239.52 "java -jar /home/ubuntu/*.jar &"

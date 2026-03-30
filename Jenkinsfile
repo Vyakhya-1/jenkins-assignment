@@ -27,11 +27,14 @@ pipeline {
             steps {
                 sshagent(['app-server-key']) {
                     sh '''
-                    # Copy the JAR to the app server
-                    scp -o StrictHostKeyChecking=no target/*.jar ubuntu@44.197.239.52:/home/ubuntu/
+                    # Define JAR name explicitly
+                    JAR_FILE=target/jenkins-assignment-1.0-SNAPSHOT.jar
 
-                    # Run the JAR in background
-                    ssh -o StrictHostKeyChecking=no ubuntu@44.197.239.52 "java -jar /home/ubuntu/*.jar &"
+                    # Copy the JAR to the app server
+                    scp -o StrictHostKeyChecking=no $JAR_FILE ubuntu@44.197.239.52:/home/ubuntu/app.jar
+
+                    # Run the JAR in background and redirect logs
+                    ssh -o StrictHostKeyChecking=no ubuntu@44.197.239.52 "nohup java -jar /home/ubuntu/app.jar > /home/ubuntu/app.log 2>&1 &"
                     '''
                 }
             }
